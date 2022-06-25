@@ -87,7 +87,7 @@ const Articles = () => {
               </select>
             </div>
           </section>
-          <section className="max-w-sm mx-auto min-h-screen">
+          <section className="max-w-sm mx-auto min-h-screen px-5">
             {articles &&
               articles.map((post, index) => (
                 <Card post={post} type={`article`} key={index} />

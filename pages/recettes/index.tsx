@@ -11,6 +11,7 @@ import { sanityClient, urlFor } from "../../sanity";
 import { IPost, IRecepiesFilter, IPostFilter } from "../../types";
 import Loader from "../../public/loader.svg";
 import TypesSelector from "../../components/TypesSelector";
+import Footer from "../../components/Footer/Footer";
 
 interface Props {
   posts: [IPost];
@@ -61,7 +62,7 @@ const Recettes = () => {
       </Head>
       <Header />
 
-      <main className="mx-auto my-16 min-h-screen">
+      <main className="mx-auto mt-16">
         <>
           <h1 className="text-3xl font-bold text-center py-7">Recettes</h1>
           <section className="mx-5">
@@ -114,6 +115,7 @@ const Recettes = () => {
           </section>
         </>
       </main>
+      <Footer />
     </div>
   );
 };

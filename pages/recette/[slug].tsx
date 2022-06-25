@@ -3,6 +3,7 @@ import Head from "next/head";
 import Image from "next/image";
 import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
+import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header";
 import { sanityClient, urlFor } from "../../sanity";
 import { IPost, IRecepies } from "../../types";
@@ -33,54 +34,58 @@ export const Post = ({ recepie }: Props) => {
           <section
             style={{
               backgroundImage:
-                "linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0)), url(" +
+                "linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0)), url(" +
                 urlFor(recepie.mainImage).url() +
                 ")",
             }}
-            className={`relative h-52 bg-cover`}
+            className={`relative h-48 bg-cover shadow-xl shadow-black" rounded-b-3xl`}
           >
             <h1 className="absolute text-2xl font-bold text-white bg-primary-color p-3 right-0 bottom-9 rounded-l-lg">
               {recepie.title}
             </h1>
           </section>
-          <section className="px-5 mx-auto">
-            <h2 className="text-center p-2">
-              <span className="font-semibold text-gray-800">Temps total: </span>
-              {recepie?.duration.totalTime} min
-            </h2>
-            <div className="flex justify-around">
-              <div>
-                <h2 className="font-semibold text-gray-800">Préparation</h2>
-                <p className="text-center">
-                  {recepie.duration.preparationTime
-                    ? `${recepie.duration.preparationTime} min`
-                    : "-"}
-                </p>
+          <section className="px-5 mx-auto pt-5">
+            <h2 className="text-xl font-bold mb-3">Temps de préparation</h2>
+            <div className="p-5 rounded-xl shadow-gray-700/20 shadow-md">
+              <div className="text-center pb-2">
+                <span className="font-semibold text-gray-800">
+                  Temps total:{" "}
+                </span>
+                {recepie?.duration.totalTime} min
               </div>
-              <div>
-                <h2 className="font-semibold text-gray-800">Repos</h2>
-                <p className="text-center">
-                  {recepie?.duration.restTime
-                    ? `${recepie?.duration.restTime} min`
-                    : "-"}
-                </p>
-              </div>
-              <div>
-                <h2 className="font-semibold text-gray-800">Cuisson</h2>
-                <p className="text-center">
-                  {recepie?.duration.cookTime
-                    ? `${recepie?.duration.cookTime} min`
-                    : "-"}
-                </p>
+              <div className="flex justify-around">
+                <div>
+                  <h2 className="font-semibold text-gray-800">Préparation</h2>
+                  <p className="text-center">
+                    {recepie.duration.preparationTime
+                      ? `${recepie.duration.preparationTime} min`
+                      : "-"}
+                  </p>
+                </div>
+                <div>
+                  <h2 className="font-semibold text-gray-800">Repos</h2>
+                  <p className="text-center">
+                    {recepie?.duration.restTime
+                      ? `${recepie?.duration.restTime} min`
+                      : "-"}
+                  </p>
+                </div>
+                <div>
+                  <h2 className="font-semibold text-gray-800">Cuisson</h2>
+                  <p className="text-center">
+                    {recepie?.duration.cookTime
+                      ? `${recepie?.duration.cookTime} min`
+                      : "-"}
+                  </p>
+                </div>
               </div>
             </div>
           </section>
-          <section className="px-5">
-            <h2 className="text-center p-2 font-semibold text-gray-800">
-              Vous cuisinez pour ?
-            </h2>
-            <div className="flex justify-center">
-              <div className=" bg-primary-color rounded-full w-7 h-7 flex justify-center items-center text-white text-2xl leading-none"
+          <section className="px-5 pt-5">
+            <h2 className="text-xl font-bold mb-3">Nombre de personnes</h2>
+            <div className="flex justify-center p-5 rounded-xl shadow-gray-700/20 shadow-md">
+              <div
+                className=" bg-primary-color rounded-full w-7 h-7 flex justify-center items-center text-white text-2xl leading-none"
                 onClick={() => {
                   if (nbPerson > 1) {
                     setNbPerson((prev) => prev - 1);
@@ -89,14 +94,11 @@ export const Post = ({ recepie }: Props) => {
               >
                 -
               </div>
-              {nbPerson === 1 && (
-                <p className="mx-5">{nbPerson} personne</p>
-              )}
-              {nbPerson > 1 && (
-                <p className="mx-5">{nbPerson} personnes</p>
-              )}
-            
-              <button className=" bg-primary-color rounded-full w-7 h-7 flex justify-center items-center text-white text-2xl leading-none"
+              {nbPerson === 1 && <p className="mx-5">{nbPerson} personne</p>}
+              {nbPerson > 1 && <p className="mx-5">{nbPerson} personnes</p>}
+
+              <button
+                className=" bg-primary-color rounded-full w-7 h-7 flex justify-center items-center text-white text-2xl leading-none"
                 onClick={() => {
                   if (nbPerson < 20) {
                     setNbPerson((prev) => prev + 1);
@@ -107,23 +109,26 @@ export const Post = ({ recepie }: Props) => {
               </button>
             </div>
           </section>
-          <section className="px-5">
-            <h2 className="text-center p-2 font-semibold text-gray-800">
-              Ingredients
-            </h2>
-            <ul className="">
-              {recepie.ingredients.map((ingredient, index) => (
-                <li className="list-inside" key={index}>
-                  {" "}
-                  {ingredient.quantity * nbPerson} {ingredient.unit}{" "}
-                  {ingredient.title}
-                </li>
-              ))}
-            </ul>
+          <section className="px-5 pt-5">
+            <h2 className="text-xl font-bold mb-3">Ingredients</h2>
+            <div className="p-5 rounded-xl shadow-gray-700/20 shadow-md">
+              <ul className="">
+                {recepie.ingredients.map((ingredient, index) => (
+                  <li className="list-inside" key={index}>
+                    {"• "}
+                    {ingredient.quantity * nbPerson} {ingredient.unit}{" "}
+                    {ingredient.title}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </section>
-          <div></div>
+          <section className="px-5 pt-5">
+            <h2 className="text-xl font-bold mb-3">Préparation</h2>
+          </section>
         </article>
       </main>
+      <Footer />
     </div>
   );
 };
