@@ -1,8 +1,57 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Header from '../../components/Header'
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Card } from "../../components/Card";
 
-const About: NextPage = () => {
+import Header from "../../components/Header";
+import SearchInput from "../../components/SearchInput";
+import { sanityClient, urlFor } from "../../sanity";
+import { IPost, IRecepiesFilter, IPostFilter } from "../../types";
+import Loader from "../../public/loader.svg";
+import TypesSelector from "../../components/TypesSelector";
+
+interface Props {
+  posts: [IPost];
+}
+
+const Recettes = () => {
+  const [recepies, setRecepies] = useState([]);
+  const [filters, setFilters] = useState<IPostFilter>({
+    search: "",
+    orderBy: "desc",
+  });
+
+  const [types, setTypes] = useState<string[]>([
+    'Entrée', 'Plat', 'Dessert'
+  ])
+
+  const [loading, setLoading] = useState<boolean>(true);
+
+
+  const getRecepies = async ({ search, orderBy}: IPostFilter, type:string[]) => {
+    setLoading(true);
+    const query = `*[_type == 'recepies' && type -> title in ${JSON.stringify(type)} && title match "${search}*"] {
+      _createdAt,
+      _id,
+      duration,
+      ingredients,
+      mainImage,
+      title,
+      slug,
+      "type": type -> title
+    }| order(_createdAt ${orderBy})`;
+
+    const recepies = await sanityClient.fetch(query)
+    setRecepies(recepies)
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getRecepies(filters, types)
+  }, [filters, types]);
+
   return (
     <div>
       <Head>
@@ -12,20 +61,61 @@ const About: NextPage = () => {
       </Head>
       <Header />
 
-      <main className='max-w-2xl m-auto'>
-
-      <h1 className='text-3xl font-bold underline'>
-        Recette
-      </h1>
-      <p>
-        Toutes les recettes
-      </p>
-
-
+      <main className="mx-auto my-16 min-h-screen">
+        <>
+          <h1 className="text-3xl font-bold text-center py-7">Recettes</h1>
+          <section className="mx-5">
+            <SearchInput
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setFilters((prev) => ({ ...prev, search: e.target.value }))
+              }
+              placeholder="Recherche ..."
+            />
+            <TypesSelector setFilters={setTypes} filters={types}/>
+            <div className="flex items-center mb-3 justify-between px-1">
+              {recepies.length > 1 && (
+                <p className="text-gray-500">{recepies.length} resultats</p>
+              )}
+              {recepies.length == 1 && (
+                <p className="text-gray-500">{recepies.length} resultat</p>
+              )}
+              <select
+                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                  setFilters((prev) => ({ ...prev, orderBy: e.target.value }))
+                }
+                name="pets"
+                id="pet-select"
+                className="p-1 border text-white bg-primary-color ml-auto  rounded-lg focus:outline-none hover:cursor-pointer"
+              >
+                <option className="h-4" value="desc">
+                  Plus récent
+                </option>
+                <option className="p-4" value="asc">
+                  Plus ancien
+                </option>
+              </select>
+            </div>
+          </section>
+          <section className="max-w-sm mx-auto min-h-screen px-5">
+            {recepies &&
+              recepies.map((recepie, index) => (
+                <Card recepies={recepie} type={`recipies`} key={index} />
+              ))}
+            {loading && (
+              <div className="mx-auto w-fit">
+                <Image src={Loader} />
+              </div>
+            )}
+            {recepies.length === 0 && !loading && (
+              <div className="font-bold text-gray-400 text-center mt-10">
+                Aucun resultats
+              </div> 
+            )}
+          </section>
+        </>
       </main>
-      
     </div>
-  )
-}
+  );
+};
 
-export default About
+export default Recettes;

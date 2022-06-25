@@ -6,8 +6,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        'primary-color': '#89BEC9',
+        'secondary-color': '#FFD4F2',
+        'creamy-white': '#FDFBE4',
+        'purple': '#77536F',
+        'black-overlay-from': 'rgba(0, 0, 0, 0.69)',
+        'black-overlay-to': 'rgba(0, 0, 0, 0.43)',
+      },
       backgroundImage: {
-        'presentation-section': "url('../public/bg-presentation-section.jpg')"
+        'presentation-section': "url('../public/bg-presentation-section.png')"
       }
     },
     fontFamily: {

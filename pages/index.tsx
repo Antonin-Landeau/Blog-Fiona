@@ -4,20 +4,23 @@ import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/Header";
 
-import profilePic from "./../public/profile-pic.jpg";
+import profilePic from "./../public/profile-pic.png";
+import listenIcon from "./../public/listen-icon.png";
+import confianceIcon from "./../public/confiance-icon.png";
+import followIcon from "./../public/follow-icon.png";
+import balance from "./../public/balance.png";
+import fruitsIcon from "./../public/fruits.png";
+import diabete from "./../public/diabete.png";
+import seniorIcon from "./../public/seniors.png";
+import pregnantIcon from "./../public/enceinte.png";
+import cancerIcon from "./../public/cancer.png";
+import medicamentIcon from "./../public/medicament.png";
+import sportIcon from "./../public/haltere.png";
 
-import listenIcon from './../public/listen-icon.png'
-import confianceIcon from './../public/confiance-icon.png'
-import followIcon from './../public/follow-icon.png'
-import { useViewportScroll } from "framer-motion";
-import { useEffect } from "react";
-
-
+import PourQuiCard from "../components/PourQuiCard";
+import Footer from "../components/Footer/Footer";
 
 const Home: NextPage = () => {
-  const {scrollYProgress} = useViewportScroll();
-
-  
   return (
     <div>
       <Head>
@@ -26,7 +29,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="mx-auto my-16">
+      <main className="mx-auto mt-16">
         <section className="bg-presentation-section bg-cover bg-bottom py-20">
           <h1 className="w-fit m-auto text-4xl font-bold text-slate-50 pb-8 md:text-5xl lg:text-7xl">
             FIONA LANDEAU
@@ -35,9 +38,9 @@ const Home: NextPage = () => {
             Nutritioniste - Sofrologue
           </h2>
         </section>
-        <section className="px-5 py-5">
+        <section className="px-7 py-5">
           <div className="">
-            <h2 className="text-green-300 text-2xl font-bold mb-5">
+            <h2 className="text-primary-color text-3xl font-bold mb-5">
               Qui-suis-je ?
             </h2>
             <Image src={profilePic} layout="responsive" />
@@ -56,39 +59,102 @@ const Home: NextPage = () => {
               manger en pleine conscience.
             </p>
             <Link href="/about">
-              <a className="block bg-green-300 text-white p-4 rounded-lg font-semibold w-fit m-auto">En Savoir Plus</a>
+              <a className="block bg-primary-color text-white p-4 rounded-lg font-semibold w-fit mx-auto my-5">
+                En Savoir Plus
+              </a>
             </Link>
           </div>
         </section>
-        <section className="bg-green-300 px-5 py-5">
-          <h2 className="text-white text-2xl font-bold mb-5">
-            Mes Valeurs
-          </h2>
+        <section className="bg-primary-color px-5 py-5">
+          <h2 className="text-white text-3xl font-bold mb-5">Mes Valeurs</h2>
           <div>
-            <div className="relative border-8 border-white my-16">
+            <div className="relative border-8 border-white my-16 max-w-xs mx-auto">
               <div className="origin-center absolute left-1/2 -translate-x-1/2 top-0 -translate-y-1/2  bg-white w-fit rounded-full p-6">
-                <Image src={listenIcon} width={30} height={30}/>
+                <Image src={listenIcon} width={30} height={30} />
               </div>
-              <h3 className="text-white text-3xl w-fit mx-auto mt-12 font-semibold">A l'écoute</h3>
-              <p className="p-5 text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae eius inventore sit earum, iure eveniet?</p>
+              <h3 className="text-white text-3xl w-fit mx-auto mt-12 font-semibold">
+                A l'écoute
+              </h3>
+              <p className="p-5 text-center">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae
+                eius inventore sit earum, iure eveniet?
+              </p>
             </div>
-            <div className="relative border-8 border-white my-16">
+            <div className="relative border-8 border-white my-16 max-w-xs mx-auto">
               <div className="origin-center absolute left-1/2 -translate-x-1/2 top-0 -translate-y-1/2  bg-white w-fit rounded-full p-6">
-                <Image src={confianceIcon} width={30} height={30}/>
+                <Image src={confianceIcon} width={30} height={30} />
               </div>
-              <h3 className="text-white text-3xl w-fit mx-auto mt-12 font-semibold">Confiance</h3>
-              <p className="p-5 text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae eius inventore sit earum, iure eveniet?</p>
+              <h3 className="text-white text-3xl w-fit mx-auto mt-12 font-semibold">
+                Confiance
+              </h3>
+              <p className="p-5 text-center">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae
+                eius inventore sit earum, iure eveniet?
+              </p>
             </div>
-            <div className="relative border-8 border-white my-16">
+            <div className="relative border-8 border-white my-16 max-w-xs mx-auto">
               <div className="origin-center absolute left-1/2 -translate-x-1/2 top-0 -translate-y-1/2  bg-white w-fit rounded-full p-6">
-                <Image src={followIcon} width={30} height={30}/>
+                <Image src={followIcon} width={30} height={30} />
               </div>
-              <h3 className="text-white text-3xl w-fit mx-auto mt-12 font-semibold">Suivis</h3>
-              <p className="p-5 text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae eius inventore sit earum, iure eveniet?</p>
+              <h3 className="text-white text-3xl w-fit mx-auto mt-12 font-semibold">
+                Suivis
+              </h3>
+              <p className="p-5 text-center">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae
+                eius inventore sit earum, iure eveniet?
+              </p>
             </div>
           </div>
         </section>
+        <section className="px-7 py-5">
+          <h2 className="text-green300 text-3xl font-bold mb-5">Pour qui ?</h2>
+          <PourQuiCard
+            content="Surpoids ; obésité ; maigreur etc…"
+            title="Problème de poids"
+            image={balance}
+          />
+          <PourQuiCard
+            reverse
+            content="Performance, gain de muscle, perte de poids "
+            title="Sportifs"
+            image={sportIcon}
+          />
+          <PourQuiCard
+            content="Exemple végétarien ou végan."
+            title="Régime Alimentaire"
+            image={fruitsIcon}
+          />
+          <PourQuiCard
+            reverse
+            content="Diminuer les prises de médicaments et réduire la glycémie"
+            title="Diabétique"
+            image={diabete}
+          />
+          <PourQuiCard
+            content="les traitements induisent des modifications de l'appétit, du goût, provoquent parfois des troubles que la diététique permet d'atténuer voire de prévenir"
+            title="Atteint de Cancer"
+            image={cancerIcon}
+          />
+          <PourQuiCard
+            reverse
+            content="Lorsque l'on prend certains traitements qui peuvent avoir une influence sur le poids (cortisone, hormonothérapie…)"
+            title="Traitement médicamenteux"
+            image={medicamentIcon}
+          />
+          <PourQuiCard
+            content="et/ou Couvade pour le papa ne l’oublions pas"
+            title="Femme enceinte"
+            image={pregnantIcon}
+          />
+          <PourQuiCard
+            reverse
+            content="Les seniors et les personnes atteintes de cancer sujets à la dénutrition et à la sarcopénie"
+            title="Ménopause - Séniors"
+            image={seniorIcon}
+          />
+        </section>
       </main>
+      <Footer />
     </div>
   );
 };

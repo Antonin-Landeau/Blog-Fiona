@@ -1,8 +1,49 @@
-import type { NextPage } from 'next'
-import Head from 'next/head'
-import Header from '../../components/Header'
+import Head from "next/head";
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { ChangeEvent, useEffect, useState } from "react";
+import { Card } from "../../components/Card";
 
-const Articles: NextPage = () => {
+import Header from "../../components/Header";
+import SearchInput from "../../components/SearchInput";
+import { sanityClient, urlFor } from "../../sanity";
+import { IPost, IPostFilter } from "../../types";
+import Loader from "../../public/loader.svg";
+
+interface Props {
+  posts: [IPost];
+}
+
+const Articles = () => {
+  const [articles, setArticles] = useState([]);
+  const [filters, setFilters] = useState<IPostFilter>({
+    search: "",
+    orderBy: "desc",
+  });
+
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const getArticles = async ({ search, orderBy }: IPostFilter) => {
+    setLoading(true);
+    const query = `*[_type == 'post' && title match "${search}*"]{
+      _id,
+      title,
+      description,
+      mainImage,
+      _createdAt,
+      slug,
+    }| order(_createdAt ${orderBy})`;
+
+    const posts = await sanityClient.fetch(query);
+    setArticles(posts);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getArticles(filters);
+  }, [filters]);
+
   return (
     <div>
       <Head>
@@ -12,20 +53,60 @@ const Articles: NextPage = () => {
       </Head>
       <Header />
 
-      <main className='max-w-2xl m-auto'>
-
-      <h1 className='text-3xl font-bold underline'>
-        Articles
-      </h1>
-      <p>
-        Toutes les Articless
-      </p>
-
-
+      <main className="mx-auto my-16 min-h-screen">
+        <>
+          <h1 className="text-3xl font-bold text-center py-7">Articles</h1>
+          <section className="mx-5">
+            <SearchInput
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setFilters((prev) => ({ ...prev, search: e.target.value }))
+              }
+              placeholder="Recherche ..."
+            />
+            <div className="flex items-center mb-3 justify-between px-1">
+              {articles.length > 1 && (
+                <p className="text-gray-500">{articles.length} resultats</p>
+              )}
+              {articles.length == 1 && (
+                <p className="text-gray-500">{articles.length} resultat</p>
+              )}
+              <select
+                onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+                  setFilters((prev) => ({ ...prev, orderBy: e.target.value }))
+                }
+                name="pets"
+                id="pet-select"
+                className="p-1 border text-white bg-primary-color ml-auto  rounded-lg focus:outline-none hover:cursor-pointer"
+              >
+                <option className="h-4" value="desc">
+                  Plus récent
+                </option>
+                <option className="p-4" value="asc">
+                  Plus ancien
+                </option>
+              </select>
+            </div>
+          </section>
+          <section className="max-w-sm mx-auto min-h-screen">
+            {articles &&
+              articles.map((post, index) => (
+                <Card post={post} type={`article`} key={index} />
+              ))}
+            {loading && (
+              <div className="mx-auto w-fit">
+                <Image src={Loader} />
+              </div>
+            )}
+            {articles.length === 0 && !loading && (
+              <div className="font-bold text-gray-400 text-center mt-10">
+                Aucun resultats
+              </div>
+            )}
+          </section>
+        </>
       </main>
-      
     </div>
-  )
-}
+  );
+};
 
-export default Articles
+export default Articles;
