@@ -19,6 +19,7 @@ import sportIcon from "./../public/haltere.png";
 
 import PourQuiCard from "../components/PourQuiCard";
 import Footer from "../components/Footer/Footer";
+import Typography from "../components/Library/Typography";
 
 const Home: NextPage = () => {
   return (

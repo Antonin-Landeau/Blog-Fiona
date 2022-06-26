@@ -13,6 +13,7 @@ module.exports = {
         'purple': '#77536F',
         'black-overlay-from': 'rgba(0, 0, 0, 0.69)',
         'black-overlay-to': 'rgba(0, 0, 0, 0.43)',
+        'paragraph-color': '#2a303b',
       },
       backgroundImage: {
         'presentation-section': "url('../public/bg-presentation-section.png')"

@@ -3,11 +3,14 @@ import Head from "next/head";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
 import Header from "../../components/Header";
+import Body from "../../components/Library/Body";
 import { sanityClient, urlFor } from "../../sanity";
-import { IPost } from "../../types";
+import { Article } from "../../types/types.articles";
+// import { IPost } from "../../types";
+
 
 interface Props {
-  post: IPost;
+  post: Article;
 }
 
 interface IParams extends ParsedUrlQuery {
@@ -15,7 +18,6 @@ interface IParams extends ParsedUrlQuery {
 }
 
 export const Post = ({ post }: Props) => {
-  console.log(post);
   return (
     <div>
       <Head>
@@ -29,17 +31,7 @@ export const Post = ({ post }: Props) => {
           <>
             <h1 className="text-4xl font-extrabold pb-5">{post.title}</h1>
             <img src={urlFor(post.mainImage).url()} alt="" />
-            {post.body &&
-              post.body.map((bodyItem: any, index) => (
-                <div key={index}>
-                  {bodyItem._type === 'block' && (
-                    <p>{bodyItem.children[0].text}</p>
-                  )}
-                  {bodyItem._type === 'image' && (
-                    <img src={urlFor(bodyItem).url()} />
-                  )}
-                </div>
-              ))}
+            <Body body={post.body}/>
           </>
         </article>
       </main>
@@ -66,8 +58,8 @@ export const getStaticPaths = async () => {
 
   const paths: any = [];
 
-  posts.forEach((post: IPost) => {
-    paths.push({ params: { slug: post.slug.current } });
+  posts.forEach((post: Article) => {
+    paths.push({ params: { slug: post?.slug?.current } });
   });
 
   return {
