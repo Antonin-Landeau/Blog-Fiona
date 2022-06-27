@@ -16,7 +16,7 @@ const PourQuiCard: FunctionComponent<Props> = ({
   reverse,
 }) => {
   return (
-    <div className="flex justify-around my-8">
+    <div className="flex justify-around md:p-5 md:rounded-xl md:shadow-gray-700/20 md:shadow-md">
       {reverse && (
         <>
           <div className="self-center">

@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
       <svg
-        className="rotate-180 "
+        className="rotate-180 m-[-5px]"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 1440 320"
       >
