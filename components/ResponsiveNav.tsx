@@ -34,7 +34,7 @@ const ResponsiveNav: NextComponentType = () => {
             Home
           </motion.a>
         </Link>
-        <Link href="/about">
+        <Link href="/about/me">
           <motion.a
             initial={{ x: 300 }}
             animate={{ x: 0 }}
