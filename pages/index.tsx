@@ -97,7 +97,7 @@ const Home: NextPage = () => {
             </div>
 
             <Link href="/about">
-              <a className="block bg-primary-color text-white p-4 rounded-lg font-semibold w-fit mx-auto my-5">
+              <a className="block text-primary-color border-4 border-primary-color text p-3 font-semibold w-fit mx-auto my-8 hover:bg-primary-color hover:text-white transition ease-out duration-700">
                 En Savoir Plus
               </a>
             </Link>
@@ -148,7 +148,7 @@ const Home: NextPage = () => {
             </div>
           </section>
           <section className="grid gap-7 px-7 py-5 max-w-md mx-auto md:max-w-xl lg:max-w-4xl lg:grid-cols-2">
-            <h2 className="text-green300 text-3xl font-bold mb-5 col-span-full">
+            <h2 className="text-green300 text-3xl font-bold mb-5 col-span-full md:text-center">
               Pour qui ?
             </h2>
             <PourQuiCard

@@ -65,7 +65,7 @@ const Recettes = () => {
       <main className="mx-auto mt-16">
         <>
           <h1 className="text-3xl font-bold text-center py-7">Recettes</h1>
-          <section className="mx-5">
+          <section className="mx-auto max-w-sm px-5">
             <SearchInput
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setFilters((prev) => ({ ...prev, search: e.target.value }))
@@ -97,18 +97,18 @@ const Recettes = () => {
               </select>
             </div>
           </section>
-          <section className="max-w-sm mx-auto min-h-screen px-5">
+          <section className="max-w-sm mx-auto min-h-screen px-5 pt-3 grid gap-7 sm:grid-cols-2 sm:max-w-2xl lg:grid-cols-3 lg:max-w-5xl">
             {recepies &&
               recepies.map((recepie, index) => (
                 <Card recepies={recepie} type={`recipies`} key={index} />
               ))}
             {loading && (
-              <div className="mx-auto w-fit">
+              <div className="mx-auto w-fit col-span-full">
                 <Image src={Loader} />
               </div>
             )}
             {recepies.length === 0 && !loading && (
-              <div className="font-bold text-gray-400 text-center mt-10">
+              <div className="font-bold text-gray-400 text-center mt-10 col-span-full">
                 Aucun resultats
               </div> 
             )}
