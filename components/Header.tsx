@@ -9,6 +9,8 @@ const Header: NextComponentType = () => {
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
 
+  const urlRegex = new RegExp('/about/g')
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
@@ -29,10 +31,10 @@ const Header: NextComponentType = () => {
             Home
           </a>
         </Link>
-        <Link href="/about">
+        <Link href="/about/me">
           <a
             className={`mx-5 ${
-              router.asPath === "/about" && "text-primary-color"
+              urlRegex.test(router.asPath) && "text-primary-color"
             }`}
           >
             About
