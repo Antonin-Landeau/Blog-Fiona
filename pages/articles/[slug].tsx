@@ -2,12 +2,12 @@ import { GetStaticProps } from "next";
 import Head from "next/head";
 import { ParsedUrlQuery } from "querystring";
 import React from "react";
+import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header";
 import Body from "../../components/Library/Body";
 import { sanityClient, urlFor } from "../../sanity";
 import { Article } from "../../types/types.articles";
 // import { IPost } from "../../types";
-
 
 interface Props {
   post: Article;
@@ -26,15 +26,18 @@ export const Post = ({ post }: Props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="my-20 mx-5">
+      <main className="mt-20 px-5 mx-auto max-w-3xl">
         <article>
           <>
-            <h1 className="text-4xl font-extrabold pb-5">{post.title}</h1>
+            <h1 className="text-4xl font-extrabold pb-5 text-text-color">
+              {post.title}
+            </h1>
             <img src={urlFor(post.mainImage).url()} alt="" />
-            <Body body={post.body}/>
+            <Body body={post.body} />
           </>
         </article>
       </main>
+      <Footer />
     </div>
   );
 };

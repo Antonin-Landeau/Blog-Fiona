@@ -10,15 +10,15 @@ const AboutPageLayout = ({children}: any) => {
   return (
     <div>
       <Header />
-      <nav className='mt-16 flex'>
+      <nav className='mt-16 flex max-w-3xl m-auto'>
         <Link href={'/about/sophrologie'}>
-          <a className={`py-3 flex-1 text-center ${router.asPath === '/about/sophrologie' && 'bg-secondary-color'}`}>Sophrologie</a>
+          <a className={`py-3 flex-1 text-center ${router.asPath === '/about/sophrologie' && 'bg-primary-color text-white'}`}>Sophrologie</a>
         </Link>
         <Link href='/about/dietetique'>
-          <a className={`py-3 flex-1 text-center ${router.asPath === '/about/dietetique' && 'bg-secondary-color'}`}>dietetique</a>
+          <a className={`py-3 flex-1 text-center ${router.asPath === '/about/dietetique' && 'bg-primary-color text-white'}`}>Dietetique</a>
         </Link>
         <Link href='/about/me'>
-          <a className={`py-3 flex-1 text-center ${router.asPath === '/about/me' && 'bg-secondary-color'}`}>me</a>
+          <a className={`py-3 flex-1 text-center ${router.asPath === '/about/me' && 'bg-primary-color text-white'}`}>Moi</a>
         </Link>
       </nav>
       {children}

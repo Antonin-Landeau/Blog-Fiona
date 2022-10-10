@@ -5,6 +5,7 @@ import { ParsedUrlQuery } from "querystring";
 import React, { useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header";
+import Body from "../../components/Library/Body";
 import { sanityClient, urlFor } from "../../sanity";
 import { IPost, IRecepies } from "../../types";
 
@@ -17,6 +18,7 @@ interface IParams extends ParsedUrlQuery {
 }
 
 export const Post = ({ recepie }: Props) => {
+  console.log(recepie)
   const [nbPerson, setNbPerson] = useState<number>(2);
   // console.log(recepie.mainImage.asset._ref.split('image-')[1])
   console.log(urlFor(recepie.mainImage).url());
@@ -29,23 +31,23 @@ export const Post = ({ recepie }: Props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="my-16">
+      <main className="mt-16 mx-auto max-w-3xl">
         <article>
           <section
             style={{
               backgroundImage:
-                "linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0)), url(" +
+                "linear-gradient(rgba(0,0,0,0.1),rgba(0,0,0,0)), url(" +
                 urlFor(recepie.mainImage).url() +
                 ")",
             }}
             className={`relative h-48 bg-cover shadow-xl shadow-black" rounded-b-3xl`}
           >
-            <h1 className="absolute text-2xl font-bold text-white bg-primary-color p-3 right-0 bottom-9 rounded-l-lg">
+            <h1 className="absolute text-2xl font-bold text-white bg-primary-color p-3 right-0 bottom-9 rounded-l-lg uppercase">
               {recepie.title}
             </h1>
           </section>
           <section className="px-5 mx-auto pt-5">
-            <h2 className="text-xl font-bold mb-3">Temps de préparation</h2>
+            <h2 className="text-2xl text-text-color font-bold mb-4 uppercase">Temps de préparation</h2>
             <div className="p-5 rounded-xl shadow-gray-700/20 shadow-md">
               <div className="text-center pb-2">
                 <span className="font-semibold text-gray-800">
@@ -82,7 +84,7 @@ export const Post = ({ recepie }: Props) => {
             </div>
           </section>
           <section className="px-5 pt-5">
-            <h2 className="text-xl font-bold mb-3">Nombre de personnes</h2>
+            <h2 className="text-2xl text-text-color font-bold mb-4 uppercase">Nombre de personnes</h2>
             <div className="flex justify-center p-5 rounded-xl shadow-gray-700/20 shadow-md">
               <div
                 className=" bg-primary-color rounded-full w-7 h-7 flex justify-center items-center text-white text-2xl leading-none"
@@ -110,7 +112,7 @@ export const Post = ({ recepie }: Props) => {
             </div>
           </section>
           <section className="px-5 pt-5">
-            <h2 className="text-xl font-bold mb-3">Ingredients</h2>
+            <h2 className="text-2xl text-text-color font-bold mb-4 uppercase">Ingredients</h2>
             <div className="p-5 rounded-xl shadow-gray-700/20 shadow-md">
               <ul className="">
                 {recepie.ingredients.map((ingredient, index) => (
@@ -124,7 +126,8 @@ export const Post = ({ recepie }: Props) => {
             </div>
           </section>
           <section className="px-5 pt-5">
-            <h2 className="text-xl font-bold mb-3">Préparation</h2>
+            <h2 className="text-2xl text-text-color font-bold mb-4 uppercase">Préparation</h2>
+            <Body body={recepie.preparation}/>
           </section>
         </article>
       </main>
@@ -174,6 +177,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     duration,
     ingredients,
     mainImage,
+    preparation,
     title,
     type,
     slug

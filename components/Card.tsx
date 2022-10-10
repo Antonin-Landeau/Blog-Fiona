@@ -10,13 +10,12 @@ interface Props {
 }
 
 export const Card = ({ post, type, recepies }: Props) => {
-
   return (
     <>
       {/* //Render Card for article components */}
       {type === "article" && (
         <Link href={`/articles/${post?.slug.current}`}>
-          <div className="hover:cursor-pointer group rounded-2xl overflow-hidden shadow-black/20 shadow-2xl h-80">
+          <div className="hover:cursor-pointer group rounded-2xl overflow-hidden shadow-black/20 shadow-2xl">
             <img
               className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
               src={urlFor(post?.mainImage).url()}
@@ -26,7 +25,7 @@ export const Card = ({ post, type, recepies }: Props) => {
               <h2 className="text-primary-color font-bold text-2xl pb-2">
                 {post?.title}
               </h2>
-              <p>{post?.description}</p>
+              <p className="text-text-color">{post?.description}</p>
             </div>
           </div>
         </Link>
@@ -34,7 +33,7 @@ export const Card = ({ post, type, recepies }: Props) => {
       {/* //Render Card for recipies components */}
       {type === "recipies" && (
         <Link href={`/recette/${recepies?.slug.current}`}>
-          <div className="hover:cursor-pointer group rounded-2xl overflow-hidden mb-10 shadow-black/20 shadow-2xl h-80">
+          <div className="hover:cursor-pointer group rounded-2xl overflow-hidden mb-10 shadow-black/20 shadow-2xl h-fit">
             <img
               className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
               src={urlFor(recepies?.mainImage).url()}
@@ -44,10 +43,7 @@ export const Card = ({ post, type, recepies }: Props) => {
               <h2 className="text-primary-color font-bold text-2xl pb-2">
                 {recepies?.title}
               </h2>
-              {recepies?.type}
-              <div>
-                {recepies?.duration.totalTime} minutes
-              </div>
+              {recepies?.type} • {recepies?.duration.totalTime} minutes
             </div>
           </div>
         </Link>

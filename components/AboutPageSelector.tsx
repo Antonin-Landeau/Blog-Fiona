@@ -7,7 +7,7 @@ interface Props {
 
 const AboutPageSelector = ({ currentPage, setCurrentPage }: Props) => {
   return (
-    <div className="flex">
+    <div className="flex max-w-xs">
       <div
         onClick={() => {
           console.log("click")

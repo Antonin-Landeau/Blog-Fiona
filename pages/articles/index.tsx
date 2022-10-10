@@ -10,6 +10,7 @@ import SearchInput from "../../components/SearchInput";
 import { sanityClient, urlFor } from "../../sanity";
 import { IPost, IPostFilter } from "../../types";
 import Loader from "../../public/loader.svg";
+import Footer from "../../components/Footer/Footer";
 
 interface Props {
   posts: [IPost];
@@ -22,11 +23,18 @@ const Articles = () => {
     orderBy: "desc",
   });
 
+  const [page, setPage] = useState(1);
+  const [pages, setpages] = useState<number | undefined>();
+  const [articlesCount, setArticlesCount] = useState<number | undefined>();
+  const [itemPerPage, setItemPerPage] = useState(3);
+
   const [loading, setLoading] = useState<boolean>(true);
 
   const getArticles = async ({ search, orderBy }: IPostFilter) => {
     setLoading(true);
-    const query = `*[_type == 'post' && title match "${search}*"]{
+    const query = `*[_type == 'post' && title match "${search}*"][${
+      page * itemPerPage - itemPerPage
+    }...${page * itemPerPage}]{
       _id,
       title,
       description,
@@ -34,15 +42,19 @@ const Articles = () => {
       _createdAt,
       slug,
     }| order(_createdAt ${orderBy})`;
+    const articlesCountQuery = `count(*[_type == 'post' && title match "${search}*"])`;
 
+    const nbPosts = await sanityClient.fetch(articlesCountQuery);
     const posts = await sanityClient.fetch(query);
+    setArticlesCount(nbPosts);
+    setpages(Math.ceil(nbPosts / itemPerPage));
     setArticles(posts);
     setLoading(false);
   };
 
   useEffect(() => {
     getArticles(filters);
-  }, [filters]);
+  }, [filters, page]);
 
   return (
     <div>
@@ -64,11 +76,11 @@ const Articles = () => {
               placeholder="Recherche ..."
             />
             <div className="flex items-center mb-3 justify-between px-1">
-              {articles.length > 1 && (
-                <p className="text-gray-500">{articles.length} resultats</p>
+              {articlesCount && articlesCount > 1 && (
+                <p className="text-gray-500">{articlesCount} resultats</p>
               )}
-              {articles.length == 1 && (
-                <p className="text-gray-500">{articles.length} resultat</p>
+              {articlesCount == 1 && (
+                <p className="text-gray-500">{articlesCount} resultat</p>
               )}
               <select
                 onChange={(e: ChangeEvent<HTMLSelectElement>) =>
@@ -87,7 +99,7 @@ const Articles = () => {
               </select>
             </div>
           </section>
-          <section className="max-w-sm mx-auto min-h-screen px-5 pt-3 grid gap-7 sm:grid-cols-2 sm:max-w-2xl lg:grid-cols-3 lg:max-w-5xl">
+          <section className="max-w-sm mx-auto  px-5 pt-3 grid gap-7 sm:grid-cols-2 sm:max-w-2xl lg:grid-cols-3 lg:max-w-5xl">
             {articles &&
               articles.map((post, index) => (
                 <Card post={post} type={`article`} key={index} />
@@ -97,14 +109,36 @@ const Articles = () => {
                 <Image src={Loader} />
               </div>
             )}
-            {articles.length === 0 && !loading && (
+            {articlesCount === 0 && !loading && (
               <div className="font-bold text-gray-400 text-center mt-10 col-span-full">
                 Aucun resultats
               </div>
             )}
           </section>
+          <div className="mx-auto w-fit my-10">
+            {page > 1 && (
+              <span
+                onClick={() => setPage((prev) => prev - 1)}
+                className="mr-5 hover:text-primary-color hover:cursor-pointer"
+              >
+                &lt;
+              </span>
+            )}
+            <span className="bg-primary-color rounded-full p-3 text-white">
+              {page}
+            </span>
+            {page !== pages && (
+              <span
+                className="ml-5 hover:text-primary-color hover:cursor-pointer"
+                onClick={() => setPage((prev) => prev + 1)}
+              >
+                &gt;
+              </span>
+            )}
+          </div>
         </>
       </main>
+      <Footer />
     </div>
   );
 };

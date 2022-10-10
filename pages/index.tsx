@@ -40,11 +40,11 @@ const Home: NextPage = () => {
               initial={{ y: -35, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, ease: "easeOut", duration: 1 }}
-              className="w-fit m-auto text-4xl font-bold text-slate-50 pb-8 md:text-5xl lg:text-7xl"
+              className="w-fit m-auto text-4xl font-bold text-primary-color pb-8 md:text-5xl lg:text-7xl"
             >
               FIONA LANDEAU
             </motion.h1>
-            <h2 className="w-fit m-auto text-2xl text-slate-100 md:text-3xl lg:text-4xl">
+            <h2 className="w-fit m-auto text-2xl text-primary-color md:text-3xl lg:text-4xl">
               <motion.span
                 initial={{ y: -50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
@@ -93,6 +93,7 @@ const Home: NextPage = () => {
                   une manière de vous nourrir simple et radicalement différente
                   de vos habitudes : manger en pleine conscience.
                 </p>
+                <p className="text-primary-color font-semibold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, ipsam?</p>
               </div>
             </div>
 
@@ -147,7 +148,7 @@ const Home: NextPage = () => {
               </div>
             </div>
           </section>
-          <section className="grid gap-7 px-7 py-5 max-w-md mx-auto md:max-w-xl lg:max-w-4xl lg:grid-cols-2">
+          <section className="grid gap-7 px-7 py-5 max-w-md mx-auto md:max-w-xl lg:max-w-4xl lg:grid-cols-2 lg:my-14">
             <h2 className="text-green300 text-3xl font-bold mb-5 col-span-full md:text-center">
               Pour qui ?
             </h2>

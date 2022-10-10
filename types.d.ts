@@ -50,6 +50,7 @@ export interface IRecepies {
   slug: {
     current: string
   },
+  preparation: [object]
 }
 
 export interface IPostFilter {
