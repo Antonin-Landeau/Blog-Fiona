@@ -18,6 +18,7 @@ import { IPost, IRecepiesFilter, IPostFilter } from "../../types";
 import Loader from "../../public/loader.svg";
 import TypesSelector from "../../components/TypesSelector";
 import Footer from "../../components/Footer/Footer";
+import Pagination from "../../components/Pagination";
 
 interface Props {
   posts: [IPost];
@@ -143,47 +144,7 @@ const Recettes = () => {
             )}
           </section>
         </>
-        <div className="mx-auto w-fit my-10">
-          {page > 1 && (
-            <span
-              className="border border-primary-color rounded-full p-3 text-primary-color hover:cursor-pointer"
-              onClick={() => setPage(1)}
-            >
-              {1}
-            </span>
-          )}
-
-          <span
-            onClick={() => setPage((prev) => prev - 1)}
-            className="p-5 hover:text-primary-color hover:cursor-pointer"
-          >
-            {page > 1 ? "<" : ""}
-          </span>
-
-          <span className="bg-primary-color rounded-full p-3 text-white">
-            {page}
-          </span>
-          {page !== pages && (
-            <span
-              className="p-5 hover:text-primary-color hover:cursor-pointer"
-              onClick={() => setPage((prev) => prev + 1)}
-            >
-              &gt;
-            </span>
-          )}
-          {page !== pages && (
-            <span
-              className="border border-primary-color rounded-full p-3 text-primary-color hover:cursor-pointer"
-              onClick={() => {
-                if (recepiesCount) {
-                  setPage(Math.ceil(recepiesCount / itemPerPage));
-                }
-              }}
-            >
-              {pages}
-            </span>
-          )}
-        </div>
+        <Pagination currentPage={page} totalPage={pages} totalItem={recepiesCount} itemPerPage={itemPerPage} setPage={setPage}/>
       </main>
       <Footer />
     </div>
