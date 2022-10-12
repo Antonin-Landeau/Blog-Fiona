@@ -2,7 +2,13 @@ import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ChangeEvent, useEffect, useState } from "react";
+import {
+  ChangeEvent,
+  ReactNode,
+  SetStateAction,
+  useEffect,
+  useState,
+} from "react";
 import { Card } from "../../components/Card";
 
 import Header from "../../components/Header";
@@ -24,16 +30,27 @@ const Recettes = () => {
     orderBy: "desc",
   });
 
-  const [types, setTypes] = useState<string[]>([
-    'Entrée', 'Plat', 'Dessert'
-  ])
+  const [page, setPage] = useState(1);
+  const [pages, setpages] = useState<number>();
+  const [recepiesCount, setRecepiesCount] = useState<number>();
+  const [itemPerPage, setItemPerPage] = useState(9);
+
+  const [types, setTypes] = useState<string[]>(["Entrée", "Plat", "Dessert"]);
 
   const [loading, setLoading] = useState<boolean>(true);
 
-
-  const getRecepies = async ({ search, orderBy}: IPostFilter, type:string[]) => {
+  const getRecepies = async (
+    { search, orderBy }: IPostFilter,
+    type: string[],
+    page: number,
+    itemPerPage: number
+  ) => {
     setLoading(true);
-    const query = `*[_type == 'recepies' && type -> title in ${JSON.stringify(type)} && title match "${search}*"] {
+    const query = `*[_type == 'recepies' && type -> title in ${JSON.stringify(
+      type
+    )} && title match "${search}*"][${page * itemPerPage - itemPerPage}...${
+      page * itemPerPage
+    }] {
       _createdAt,
       _id,
       duration,
@@ -43,15 +60,26 @@ const Recettes = () => {
       slug,
       "type": type -> title
     }| order(_createdAt ${orderBy})`;
+    const recepiesCountQuery = `count(*[_type == 'recepies'&& type -> title in ${JSON.stringify(
+      type
+    )}  && title match "${search}*"])`;
 
-    const recepies = await sanityClient.fetch(query)
-    setRecepies(recepies)
+    const recepies = await sanityClient.fetch(query);
+    const recepiesCount = await sanityClient.fetch(recepiesCountQuery);
+    setRecepiesCount(recepiesCount);
+    setpages(Math.ceil(recepiesCount / itemPerPage));
+    setRecepies(recepies);
     setLoading(false);
   };
 
   useEffect(() => {
-    getRecepies(filters, types)
+    setPage(1);
+    getRecepies(filters, types, page, itemPerPage);
   }, [filters, types]);
+
+  useEffect(() => {
+    getRecepies(filters, types, page, itemPerPage);
+  }, [page]);
 
   return (
     <div>
@@ -62,7 +90,7 @@ const Recettes = () => {
       </Head>
       <Header />
 
-      <main className="mx-auto mt-16">
+      <main className="mx-auto mt-16 mb-16">
         <>
           <h1 className="text-3xl font-bold text-center py-7">Recettes</h1>
           <section className="mx-auto max-w-sm px-5">
@@ -72,13 +100,13 @@ const Recettes = () => {
               }
               placeholder="Recherche ..."
             />
-            <TypesSelector setFilters={setTypes} filters={types}/>
+            <TypesSelector setFilters={setTypes} filters={types} />
             <div className="flex items-center mb-3 justify-between px-1">
-              {recepies.length > 1 && (
-                <p className="text-gray-500">{recepies.length} resultats</p>
+              {recepiesCount && recepiesCount > 1 && (
+                <p className="text-gray-500">{recepiesCount} resultats</p>
               )}
-              {recepies.length == 1 && (
-                <p className="text-gray-500">{recepies.length} resultat</p>
+              {recepiesCount == 1 && (
+                <p className="text-gray-500">{recepiesCount} resultat</p>
               )}
               <select
                 onChange={(e: ChangeEvent<HTMLSelectElement>) =>
@@ -97,8 +125,9 @@ const Recettes = () => {
               </select>
             </div>
           </section>
-          <section className="max-w-sm mx-auto min-h-screen px-5 pt-3 grid gap-7 sm:grid-cols-2 sm:max-w-2xl lg:grid-cols-3 lg:max-w-5xl">
+          <section className="max-w-sm mx-auto px-5 pt-3 grid gap-7 sm:grid-cols-2 sm:max-w-2xl lg:grid-cols-3 lg:max-w-5xl">
             {recepies &&
+              !loading &&
               recepies.map((recepie, index) => (
                 <Card recepies={recepie} type={`recipies`} key={index} />
               ))}
@@ -110,10 +139,51 @@ const Recettes = () => {
             {recepies.length === 0 && !loading && (
               <div className="font-bold text-gray-400 text-center mt-10 col-span-full">
                 Aucun resultats
-              </div> 
+              </div>
             )}
           </section>
         </>
+        <div className="mx-auto w-fit my-10">
+          {page > 1 && (
+            <span
+              className="border border-primary-color rounded-full p-3 text-primary-color hover:cursor-pointer"
+              onClick={() => setPage(1)}
+            >
+              {1}
+            </span>
+          )}
+
+          <span
+            onClick={() => setPage((prev) => prev - 1)}
+            className="p-5 hover:text-primary-color hover:cursor-pointer"
+          >
+            {page > 1 ? "<" : ""}
+          </span>
+
+          <span className="bg-primary-color rounded-full p-3 text-white">
+            {page}
+          </span>
+          {page !== pages && (
+            <span
+              className="p-5 hover:text-primary-color hover:cursor-pointer"
+              onClick={() => setPage((prev) => prev + 1)}
+            >
+              &gt;
+            </span>
+          )}
+          {page !== pages && (
+            <span
+              className="border border-primary-color rounded-full p-3 text-primary-color hover:cursor-pointer"
+              onClick={() => {
+                if (recepiesCount) {
+                  setPage(Math.ceil(recepiesCount / itemPerPage));
+                }
+              }}
+            >
+              {pages}
+            </span>
+          )}
+        </div>
       </main>
       <Footer />
     </div>

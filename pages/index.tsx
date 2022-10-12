@@ -16,6 +16,8 @@ import pregnantIcon from "./../public/enceinte.png";
 import cancerIcon from "./../public/cancer.png";
 import medicamentIcon from "./../public/medicament.png";
 import sportIcon from "./../public/haltere.png";
+import phoneIcon from "./../public/telephone.png";
+import emailIcon from "./../public/email.png";
 
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -69,13 +71,13 @@ const Home: NextPage = () => {
               </motion.span>
             </h2>
           </section>
-          <section className="px-7 py-5 max-w-md mx-auto md:max-w-4xl lg:max-w-4xl">
+          <section className="px-7 py-5 max-w-md mx-auto md:max-w-4xl lg:max-w-4xl lg:py-10">
             <motion.h2
               initial={{ y: 50, opacity: 0 }}
               viewport={{ once: true }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ ease: "easeOut", duration: 0.7 }}
-              className="text-primary-color text-3xl font-bold mb-5 md:text-center md:mb-7"
+              className="text-text-color text-3xl font-bold mb-5 md:text-center md:mb-7"
             >
               Qui-suis-je ?
             </motion.h2>
@@ -96,7 +98,7 @@ const Home: NextPage = () => {
                 transition={{ delay: 0.3, ease: "easeOut", duration: 0.7 }}
                 className="flex-1 pl-5"
               >
-                <p className="my-5 indent-10 flex-1">
+                <p className="my-5 indent-10 flex-1 lg:text-lg">
                   Je m’appelle LANDEAU Fiona et suis diplômée d’un BTS
                   diététique depuis 2018. J’aime apprendre et c’est pourquoi
                   j’ai également obtenu par la suite un Diplôme Universitaire en
@@ -105,13 +107,13 @@ const Home: NextPage = () => {
                   de retrouver plaisir de manger, grâce a des conseils
                   personnalisés.
                 </p>
-                <p className="my-5 indent-10">
+                <p className="my-5 indent-10 lg:text-lg">
                   En effet, mes compétences actuelles me permettent d’allier
                   sophrologie et diététique, ce qui vous permettra de trouver
                   une manière de vous nourrir simple et radicalement différente
                   de vos habitudes : manger en pleine conscience.
                 </p>
-                <p className="text-primary-color font-semibold">
+                <p className="text-primary-color font-semibold lg:text-lg">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Libero, ipsam?
                 </p>
@@ -250,19 +252,48 @@ const Home: NextPage = () => {
               image={seniorIcon}
             />
           </section>
-          <section>
+          <section className="px-7 py-10 max-w-md mx-auto md:max-w-4xl lg:max-w-4xl lg:mb-5">
             <motion.h2
               initial={{ y: 100, opacity: 0 }}
               viewport={{ once: true }}
               whileInView={{ y: 0, opacity: 1 }}
               transition={{ ease: "easeOut", duration: 0.7 }}
-              className="text-green300 text-3xl font-bold mb-5 col-span-full md:text-center"
+              className="text-green300 text-3xl font-bold pb-5 col-span-full text-center"
             >
               Me contacter
             </motion.h2>
-            <div>
-              
-            </div>
+            <motion.div
+              initial={{ y: 100, opacity: 0 }}
+              viewport={{ once: true }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 0.7 }}
+              className="flex justify-center items-center my-3 mx-auto"
+            >
+              <Image src={phoneIcon} width={25} height={25} />
+              <p className="pl-3 text-lg">07 81 33 19 15</p>
+            </motion.div>
+            <motion.div
+              initial={{ y: 100, opacity: 0 }}
+              viewport={{ once: true }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 0.7 }}
+              className="flex justify-center items-center my-3 mx-auto"
+            >
+              <Image src={emailIcon} width={25} height={25} />
+              <p className="pl-3 text-lg">contact@anclaje.fr</p>
+            </motion.div>
+            <motion.p
+              initial={{ y: 100, opacity: 0 }}
+              viewport={{ once: true }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 0.7 }}
+              className="p-5 text-center text-lg"
+            >
+              <strong>50€</strong> la première consultation d’une durée
+              approximative de 1h et
+              <strong> 30€</strong> les suivantes, d’une durée comprise entre 30
+              et 45 minutes en moyenne.
+            </motion.p>
           </section>
         </main>
         <SocialMediaNav />

@@ -33,14 +33,14 @@ export const Card = ({ post, type, recepies }: Props) => {
       {/* //Render Card for recipies components */}
       {type === "recipies" && (
         <Link href={`/recette/${recepies?.slug.current}`}>
-          <div className="hover:cursor-pointer group rounded-2xl overflow-hidden mb-10 shadow-black/20 shadow-2xl h-fit">
+          <div className="hover:cursor-pointer group rounded-2xl overflow-hidden shadow-black/20 shadow-2xl h-fit">
             <img
               className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
               src={urlFor(recepies?.mainImage).url()}
               alt={`photo-post-${recepies?.slug}`}
             />
             <div className="bg-white p-3">
-              <h2 className="text-primary-color font-bold text-2xl pb-2">
+              <h2 className="text-primary-color font-bold text-2xl pb-2 whitespace-nowrap overflow-hidden text-ellipsis">
                 {recepies?.title}
               </h2>
               {recepies?.type} • {recepies?.duration.totalTime} minutes

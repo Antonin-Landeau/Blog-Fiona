@@ -115,7 +115,7 @@ export const Post = ({ recepie }: Props) => {
             <h2 className="text-2xl text-text-color font-bold mb-4 uppercase">Ingredients</h2>
             <div className="p-5 rounded-xl shadow-gray-700/20 shadow-md">
               <ul className="">
-                {recepie.ingredients.map((ingredient, index) => (
+                {recepie.ingredients?.map((ingredient, index) => (
                   <li className="list-inside" key={index}>
                     {"• "}
                     {ingredient.quantity * nbPerson} {ingredient.unit}{" "}

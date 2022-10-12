@@ -15,6 +15,13 @@ const Typography = ({ item }: Props) => {
           ))}
         </h2>
       )}
+      {item.style === "h3" && (
+        <h2 className="text-primary-color font-semibold text-xl pl-2">
+          {item.children?.map((child, index) => (
+            <>{child.text}</>
+          ))}
+        </h2>
+      )}
       {item.style === "normal" && !item.listItem && (
         <p className="text-justify my-3 indent-6 text-text-color">
           {item.children?.map((child, index) => (
