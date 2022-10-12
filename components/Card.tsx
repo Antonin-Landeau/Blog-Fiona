@@ -15,7 +15,7 @@ export const Card = ({ post, type, recepies }: Props) => {
       {/* //Render Card for article components */}
       {type === "article" && (
         <Link href={`/articles/${post?.slug.current}`}>
-          <div className="hover:cursor-pointer group rounded-2xl overflow-hidden shadow-black/20 shadow-2xl">
+          <div className="hover:cursor-pointer group rounded-2xl overflow-hidden shadow-black/20 shadow-2xl h-72">
             <img
               className="w-full h-40 object-cover group-hover:scale-105 transition-transform duration-200 ease-in-out"
               src={urlFor(post?.mainImage).url()}
@@ -25,7 +25,7 @@ export const Card = ({ post, type, recepies }: Props) => {
               <h2 className="text-primary-color font-bold text-2xl pb-2">
                 {post?.title}
               </h2>
-              <p className="text-text-color">{post?.description}</p>
+              <p className="text-text-color whitespace-nowrap overflow-hidden text-ellipsis">{post?.description}</p>
             </div>
           </div>
         </Link>

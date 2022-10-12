@@ -14,16 +14,8 @@ const Body = ({ body }: Props) => {
       {body &&
         body.map((item) => (
           <>
-            {item._type === "block" &&
-              item.children?.map((child, index) => (
-                <Typography
-                  content={child.text}
-                  style={item.style}
-                  key={index}
-                  listItem={item?.listItem}
-                  level={item.level}
-                />
-              ))}
+            {item._type === "block" && <Typography item={item} />}
+
             {item._type === "image" && <img src={urlFor(item.asset).url()} />}
           </>
         ))}

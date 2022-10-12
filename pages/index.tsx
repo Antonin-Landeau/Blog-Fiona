@@ -48,14 +48,14 @@ const Home: NextPage = () => {
               <motion.span
                 initial={{ y: -50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1.3, ease: "easeOut", duration: 1 }}
+                transition={{ delay: 0.4, ease: "easeOut", duration: 1 }}
               >
                 Nutritioniste
               </motion.span>
               <motion.span
                 initial={{ y: -50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1.3, ease: "easeOut", duration: 1 }}
+                transition={{ delay: 0.4, ease: "easeOut", duration: 1 }}
               >
                 {" "}
                 -{" "}
@@ -63,21 +63,39 @@ const Home: NextPage = () => {
               <motion.span
                 initial={{ y: -50, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 1.3, ease: "easeOut", duration: 1 }}
+                transition={{ delay: 0.4, ease: "easeOut", duration: 1 }}
               >
                 Sofrologue
               </motion.span>
             </h2>
           </section>
           <section className="px-7 py-5 max-w-md mx-auto md:max-w-4xl lg:max-w-4xl">
-            <h2 className="text-primary-color text-3xl font-bold mb-5 md:text-center md:mb-7">
+            <motion.h2
+              initial={{ y: 50, opacity: 0 }}
+              viewport={{ once: true }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 0.7 }}
+              className="text-primary-color text-3xl font-bold mb-5 md:text-center md:mb-7"
+            >
               Qui-suis-je ?
-            </h2>
+            </motion.h2>
             <div className="md:flex md:justify-between md:items-center">
-              <div className="relative w-full h-96 flex-1">
+              <motion.div
+                initial={{ x: -100, opacity: 0 }}
+                viewport={{ once: true }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.3, ease: "easeOut", duration: 0.7 }}
+                className="relative w-full h-96 flex-1"
+              >
                 <Image src={profilePic} layout="fill" objectFit="contain" />
-              </div>
-              <div className="flex-1 pl-5">
+              </motion.div>
+              <motion.div
+                initial={{ x: 100, opacity: 0 }}
+                viewport={{ once: true }}
+                animate={{ x: 0, opacity: 1 }}
+                transition={{ delay: 0.3, ease: "easeOut", duration: 0.7 }}
+                className="flex-1 pl-5"
+              >
                 <p className="my-5 indent-10 flex-1">
                   Je m’appelle LANDEAU Fiona et suis diplômée d’un BTS
                   diététique depuis 2018. J’aime apprendre et c’est pourquoi
@@ -93,8 +111,11 @@ const Home: NextPage = () => {
                   une manière de vous nourrir simple et radicalement différente
                   de vos habitudes : manger en pleine conscience.
                 </p>
-                <p className="text-primary-color font-semibold">Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero, ipsam?</p>
-              </div>
+                <p className="text-primary-color font-semibold">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Libero, ipsam?
+                </p>
+              </motion.div>
             </div>
 
             <Link href="/about/me">
@@ -105,11 +126,23 @@ const Home: NextPage = () => {
           </section>
           <section className="bg-primary-color  py-5">
             <div className="max-w-md mx-auto px-7 md:max-w-none">
-              <h2 className="text-white text-3xl font-bold mb-5 md:text-center">
+              <motion.h2
+                initial={{ y: 100, opacity: 0 }}
+                viewport={{ once: true }}
+                whileInView={{ y: 0, opacity: 1 }}
+                transition={{ ease: "easeOut", duration: 0.7 }}
+                className="text-white text-3xl font-bold mb-5 md:text-center"
+              >
                 Mes Valeurs
-              </h2>
+              </motion.h2>
               <div className="md:flex md:justify-around md:max-w-6xl md:mx-auto xl:max-w-5xl">
-                <div className="relative border-8 border-white my-16 mx-auto max-w-sm md:mx-3 xl:w-72">
+                <motion.div
+                  viewport={{ once: true }}
+                  initial={{ y: 100, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ ease: "easeOut", duration: 0.7 }}
+                  className="relative border-8 border-white my-16 mx-auto max-w-sm md:mx-3 xl:w-72"
+                >
                   <div className="origin-center absolute left-1/2 -translate-x-1/2 top-0 -translate-y-1/2  bg-white w-fit rounded-full p-6">
                     <Image src={listenIcon} width={30} height={30} />
                   </div>
@@ -117,11 +150,18 @@ const Home: NextPage = () => {
                     A l'écoute
                   </h3>
                   <p className="p-5 text-center">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Vitae eius inventore sit earum, iure eveniet?
+                    "L’important est, lorsque nous écoutons, de savoir être
+                    présent aux sentiments et aux besoins spécifiques que
+                    ressent un individu" Dr. Marshall ROSENBERG
                   </p>
-                </div>
-                <div className="relative border-8 border-white my-16 mx-auto max-w-sm md:mx-3 xl:w-72">
+                </motion.div>
+                <motion.div
+                  viewport={{ once: true }}
+                  initial={{ y: 100, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.2, ease: "easeOut", duration: 0.7 }}
+                  className="relative border-8 border-white my-16 mx-auto max-w-sm md:mx-3 xl:w-72"
+                >
                   <div className="origin-center absolute left-1/2 -translate-x-1/2 top-0 -translate-y-1/2  bg-white w-fit rounded-full p-6">
                     <Image src={confianceIcon} width={30} height={30} />
                   </div>
@@ -129,11 +169,17 @@ const Home: NextPage = () => {
                     Confiance
                   </h3>
                   <p className="p-5 text-center">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Vitae eius inventore sit earum, iure eveniet?
+                    Gagner confiance en soi car comme le disait Ralph WALDO La
+                    confiance en soi est le premier secret du succès.
                   </p>
-                </div>
-                <div className="relative border-8 border-white my-16 mx-auto max-w-sm md:mx-3 xl:w-72">
+                </motion.div>
+                <motion.div
+                  viewport={{ once: true }}
+                  initial={{ y: 100, opacity: 0 }}
+                  whileInView={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.4, ease: "easeOut", duration: 0.7 }}
+                  className="relative border-8 border-white my-16 mx-auto max-w-sm md:mx-3 xl:w-72"
+                >
                   <div className="origin-center absolute left-1/2 -translate-x-1/2 top-0 -translate-y-1/2  bg-white w-fit rounded-full p-6">
                     <Image src={followIcon} width={30} height={30} />
                   </div>
@@ -141,17 +187,24 @@ const Home: NextPage = () => {
                     Suivis
                   </h3>
                   <p className="p-5 text-center">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Vitae eius inventore sit earum, iure eveniet?
+                    Vous proposer un suivi personnalisé et à votre rythme. Mon
+                    objectif est de vous transmettre des outils qui vous
+                    accompagneront toute votre vie.
                   </p>
-                </div>
+                </motion.div>
               </div>
             </div>
           </section>
           <section className="grid gap-7 px-7 py-5 max-w-md mx-auto md:max-w-xl lg:max-w-4xl lg:grid-cols-2 lg:my-14">
-            <h2 className="text-green300 text-3xl font-bold mb-5 col-span-full md:text-center">
+            <motion.h2
+              initial={{ y: 100, opacity: 0 }}
+              viewport={{ once: true }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 0.7 }}
+              className="text-green300 text-3xl font-bold mb-5 col-span-full md:text-center"
+            >
               Pour qui ?
-            </h2>
+            </motion.h2>
             <PourQuiCard
               content="Surpoids ; obésité ; maigreur etc…"
               title="Problème de poids"
@@ -196,6 +249,20 @@ const Home: NextPage = () => {
               title="Ménopause - Séniors"
               image={seniorIcon}
             />
+          </section>
+          <section>
+            <motion.h2
+              initial={{ y: 100, opacity: 0 }}
+              viewport={{ once: true }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ ease: "easeOut", duration: 0.7 }}
+              className="text-green300 text-3xl font-bold mb-5 col-span-full md:text-center"
+            >
+              Me contacter
+            </motion.h2>
+            <div>
+              
+            </div>
           </section>
         </main>
         <SocialMediaNav />

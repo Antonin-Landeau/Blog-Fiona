@@ -4,7 +4,7 @@ const Footer = () => {
   return (
     <>
       <svg
-        className="w-full mb-[-60px]"
+        className="w-full mb-[-70px]"
         width="2183"
         height="138"
         viewBox="0 0 2183 138"
@@ -23,12 +23,12 @@ const Footer = () => {
         <div className="md:flex md:items-center md:justify-around md:max-w-5xl md:m-auto">
           <div>
             <div className="m-auto">
-              <Link href="/" >
+              <Link href="/">
                 <svg
                   className="fill-creamy-white mx-auto py-3"
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 500 99"
-                  width={180}
+                  width={300}
                 >
                   <path d="M91.94,91.73V67.64L58.6,5.87,11.5,91.79h14L35.2,73.65H81.68l9.57,18.14ZM40.85,63,58.46,29.83,76,63Z" />
                   <path d="M173.2,9.16H160.49V73.32L109.58,9.17H96.85V91.73h12.77v-64l50.92,64H173.2V75.15a43,43,0,0,1,0-49.31Z" />
@@ -39,6 +39,11 @@ const Footer = () => {
                 </svg>
               </Link>
             </div>
+            <Link href="/mentions">
+              <a className="text-creamy-white hover:underline text-center block">
+                Mentions Légales
+              </a>
+            </Link>
             <p className="text-center text-slate-200 text-xs">
               © Fiona Landeau - Tout droit reservé
             </p>

@@ -18,10 +18,10 @@ const Header: NextComponentType = () => {
   };
 
   return (
-    <header className="fixed justify-between items-center flex w-full h-16 px-5 bg-white top-0 border-b border-slate-400 z-10 ">
+    <header className="fixed justify-between items-center flex w-full h-16 px-5 bg-white top-0 border-b border-slate-400 z-10 lg:h-20">
       <Link href="/">
         <svg
-          className="fill-primary-color md:hidden"
+          className="fill-primary-color lg:hidden"
           xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 500 99"
           width={200}
@@ -35,7 +35,7 @@ const Header: NextComponentType = () => {
         </svg>
       </Link>
       {isMenuOpen && <ResponsiveNav />}
-      <nav className="hidden md:flex mx-auto items-center">
+      <nav className="hidden lg:flex mx-auto items-center">
         <Link href="/">
           <a
             className={`mx-7 text-2xl ${
@@ -47,7 +47,7 @@ const Header: NextComponentType = () => {
         </Link>
         <Link href="/about/me">
           <a
-            className={`mx-7 text-2xl ${
+            className={`mx-7 text-2xl whitespace-nowrap ${
               urlRegex.test(router.asPath) && "text-primary-color font-semibold"
             }`}
           >
@@ -59,7 +59,7 @@ const Header: NextComponentType = () => {
             className="fill-primary-color mx-5 hover:cursor-pointer"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 500 99"
-            width={200}
+            width={250}
           >
             <path d="M91.94,91.73V67.64L58.6,5.87,11.5,91.79h14L35.2,73.65H81.68l9.57,18.14ZM40.85,63,58.46,29.83,76,63Z" />
             <path d="M173.2,9.16H160.49V73.32L109.58,9.17H96.85V91.73h12.77v-64l50.92,64H173.2V75.15a43,43,0,0,1,0-49.31Z" />
@@ -103,7 +103,7 @@ const Header: NextComponentType = () => {
         </Link>
       </nav> */}
       <div
-        className="relative h-9 w-9 items-center justify-center md:hidden"
+        className="relative h-9 w-9 items-center justify-center lg:hidden"
         onClick={toggleMenu}
       >
         <div

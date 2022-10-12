@@ -26,7 +26,7 @@ const Articles = () => {
   const [page, setPage] = useState(1);
   const [pages, setpages] = useState<number | undefined>();
   const [articlesCount, setArticlesCount] = useState<number | undefined>();
-  const [itemPerPage, setItemPerPage] = useState(3);
+  const [itemPerPage, setItemPerPage] = useState(2);
 
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -68,7 +68,7 @@ const Articles = () => {
       <main className="mx-auto my-16 min-h-screen">
         <>
           <h1 className="text-3xl font-bold text-center py-7">Articles</h1>
-          <section className="mx-auto max-w-sm px-5">
+          <section className="mx-auto max-w-sm px-5 ">
             <SearchInput
               onChange={(e: ChangeEvent<HTMLInputElement>) =>
                 setFilters((prev) => ({ ...prev, search: e.target.value }))
@@ -99,7 +99,7 @@ const Articles = () => {
               </select>
             </div>
           </section>
-          <section className="max-w-sm mx-auto  px-5 pt-3 grid gap-7 sm:grid-cols-2 sm:max-w-2xl lg:grid-cols-3 lg:max-w-5xl">
+          <section className="max-w-sm mx-auto  px-5 pt-3 grid gap-7 sm:grid-cols-2 sm:max-w-2xl lg:grid-cols-3 lg:max-w-5xl lg:min-h-screen">
             {articles &&
               articles.map((post, index) => (
                 <Card post={post} type={`article`} key={index} />
@@ -115,7 +115,9 @@ const Articles = () => {
               </div>
             )}
           </section>
-          <div className="mx-auto w-fit my-10">
+          
+        </>
+        <div className="mx-auto w-fit my-10">
             {page > 1 && (
               <span
                 onClick={() => setPage((prev) => prev - 1)}
@@ -136,7 +138,6 @@ const Articles = () => {
               </span>
             )}
           </div>
-        </>
       </main>
       <Footer />
     </div>

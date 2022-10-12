@@ -12,6 +12,7 @@ import author from './author'
 import recepies from './recepies'
 import ingredient from './ingredient'
 import recepiesTypes from './recepiesTypes'
+import mentions from './mentions'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -28,6 +29,7 @@ export default createSchema({
     recepies,
     ingredient,
     recepiesTypes,
+    mentions,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
     blockContent,

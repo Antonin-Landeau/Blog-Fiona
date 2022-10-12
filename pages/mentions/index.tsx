@@ -1,10 +1,20 @@
 import Head from "next/head";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header";
+import Body from "../../components/Library/Body";
 import Typography from "../../components/Library/Typography";
+import { sanityClient } from "../../sanity";
 
-const LegalMention = () => {
+interface Props {
+  mentions: {
+    title: string,
+    body: any
+  }
+}
+
+const LegalMention = ({mentions}: Props) => {
+  console.log(mentions)
   return (
     <>
       <Head>
@@ -13,39 +23,123 @@ const LegalMention = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Header />
-      <main className="mt-20 px-5 min-h-full">
-        <Typography style="h1" content="Mention Légales" />
-        <Typography
-          content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-          cupiditate vitae eligendi ut deleniti magnam esse aspernatur laborum!
-          Nisi quis tempora voluptatibus, est explicabo cupiditate earum
-          exercitationem amet soluta ullam fugit eligendi quaerat error, aliquam
-          saepe, deleniti reiciendis quisquam fuga repellendus tempore
-          temporibus harum molestiae animi? Veritatis temporibus maiores totam!"
-          style="normal"
-        />
-        <Typography
-          content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-          cupiditate vitae eligendi ut deleniti magnam esse aspernatur laborum!
-          Nisi quis tempora voluptatibus, est explicabo cupiditate earum
-          exercitationem amet soluta ullam fugit eligendi quaerat error, aliquam
-          saepe, deleniti reiciendis quisquam fuga repellendus tempore
-          temporibus harum molestiae animi? Veritatis temporibus maiores totam!"
-          style="normal"
-        />
-        <Typography
-          content="Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-          cupiditate vitae eligendi ut deleniti magnam esse aspernatur laborum!
-          Nisi quis tempora voluptatibus, est explicabo cupiditate earum
-          exercitationem amet soluta ullam fugit eligendi quaerat error, aliquam
-          saepe, deleniti reiciendis quisquam fuga repellendus tempore
-          temporibus harum molestiae animi? Veritatis temporibus maiores totam!"
-          style="normal"
-        />
+      <main className="mt-20 px-5 min-h-full max-w-3xl m-auto mb-20">
+        {/* <Typography style="h1" content={mentions.title} /> */}
+        <Body body={mentions.body} />
+        <div>
+          <a
+            href="https://www.flaticon.com/free-icons/diabetes"
+            title="diabetes icons"
+          >
+            Diabetes icons created by Freepik - Flaticon
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.flaticon.com/fr/icones-gratuites/oreille"
+            title="oreille icônes"
+          >
+            Oreille icônes créées par Freepik - Flaticon
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.flaticon.com/fr/icones-gratuites/suivi"
+            title="suivi icônes"
+          >
+            Suivi icônes créées par kerismaker - Flaticon
+          </a>
+        </div>
+        <div>
+          {" "}
+          <a
+            href="https://www.flaticon.com/fr/icones-gratuites/confiance"
+            title="confiance icônes"
+          >
+            Confiance icônes créées par Talha Dogar - Flaticon
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.flaticon.com/fr/icones-gratuites/poids"
+            title="poids icônes"
+          >
+            Poids icônes créées par Freepik - Flaticon
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.flaticon.com/fr/icones-gratuites/gym"
+            title="gym icônes"
+          >
+            Gym icônes créées par Freepik - Flaticon
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.flaticon.com/fr/icones-gratuites/regime"
+            title="régime icônes"
+          >
+            Régime icônes créées par Freepik - Flaticon
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.flaticon.com/fr/icones-gratuites/diabete"
+            title="diabète icônes"
+          >
+            Diabète icônes créées par Freepik - Flaticon
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.flaticon.com/fr/icones-gratuites/cancer"
+            title="cancer icônes"
+          >
+            Cancer icônes créées par lakonicon - Flaticon
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.flaticon.com/fr/icones-gratuites/medicaments"
+            title="médicaments icônes"
+          >
+            Médicaments icônes créées par iconnut - Flaticon
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.flaticon.com/fr/icones-gratuites/enceinte"
+            title="enceinte icônes"
+          >
+            Enceinte icônes créées par Vitaly Gorbachev - Flaticon
+          </a>
+        </div>
+        <div>
+          <a
+            href="https://www.flaticon.com/fr/icones-gratuites/personnes-agees"
+            title="personnes âgées icônes"
+          >
+            Personnes âgées icônes créées par Nadiinko - Flaticon
+          </a>{" "}
+        </div>
       </main>
       <Footer />
     </>
   );
 };
+
+export async function getStaticProps() {
+
+  const query = `*[_type == 'mentions'][0]` 
+  const mentions = await sanityClient.fetch(query);
+  console.log(mentions)
+
+  return {
+    props: {
+      mentions,
+    },
+  }
+}
 
 export default LegalMention;
