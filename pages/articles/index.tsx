@@ -11,6 +11,7 @@ import { sanityClient, urlFor } from "../../sanity";
 import { IPost, IPostFilter } from "../../types";
 import Loader from "../../public/loader.svg";
 import Footer from "../../components/Footer/Footer";
+import Pagination from "../../components/Pagination";
 
 interface Props {
   posts: [IPost];
@@ -26,7 +27,7 @@ const Articles = () => {
   const [page, setPage] = useState(1);
   const [pages, setpages] = useState<number | undefined>();
   const [articlesCount, setArticlesCount] = useState<number | undefined>();
-  const [itemPerPage, setItemPerPage] = useState(2);
+  const [itemPerPage, setItemPerPage] = useState(1);
 
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -65,7 +66,7 @@ const Articles = () => {
       </Head>
       <Header />
 
-      <main className="mx-auto my-16 min-h-screen">
+      <main className="mx-auto my-16">
         <>
           <h1 className="text-3xl font-bold text-center py-7">Articles</h1>
           <section className="mx-auto max-w-sm px-5 ">
@@ -99,7 +100,7 @@ const Articles = () => {
               </select>
             </div>
           </section>
-          <section className="max-w-sm mx-auto  px-5 pt-3 grid gap-7 sm:grid-cols-2 sm:max-w-2xl lg:grid-cols-3 lg:max-w-5xl lg:min-h-screen">
+          <section className="max-w-sm mx-auto min-h-screen px-5 pt-3 grid gap-7 sm:grid-cols-2 sm:max-w-2xl lg:grid-cols-3 lg:max-w-5xl">
             {articles &&
               articles.map((post, index) => (
                 <Card post={post} type={`article`} key={index} />
@@ -115,29 +116,8 @@ const Articles = () => {
               </div>
             )}
           </section>
-          
         </>
-        <div className="mx-auto w-fit my-10">
-            {page > 1 && (
-              <span
-                onClick={() => setPage((prev) => prev - 1)}
-                className="mr-5 hover:text-primary-color hover:cursor-pointer"
-              >
-                &lt;
-              </span>
-            )}
-            <span className="bg-primary-color rounded-full p-3 text-white">
-              {page}
-            </span>
-            {page !== pages && (
-              <span
-                className="ml-5 hover:text-primary-color hover:cursor-pointer"
-                onClick={() => setPage((prev) => prev + 1)}
-              >
-                &gt;
-              </span>
-            )}
-          </div>
+        <Pagination currentPage={page} itemPerPage={itemPerPage} setPage={setPage} totalItem={articlesCount} totalPage={pages} />
       </main>
       <Footer />
     </div>
