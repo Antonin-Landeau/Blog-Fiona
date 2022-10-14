@@ -27,7 +27,7 @@ const Articles = () => {
   const [page, setPage] = useState(1);
   const [pages, setpages] = useState<number | undefined>();
   const [articlesCount, setArticlesCount] = useState<number | undefined>();
-  const [itemPerPage, setItemPerPage] = useState(1);
+  const [itemPerPage, setItemPerPage] = useState(9);
 
   const [loading, setLoading] = useState<boolean>(true);
 
